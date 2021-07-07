@@ -54,7 +54,6 @@
 										<td><?= $pengajaran['tahun_ajaran'] ?></td>
 										<td><?= $pengajaran['semester'] ?></td>
 										<td style="text-align:center">
-											<a href="<?= base_url('guru/detail/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm">Detail</a>
 											<a href="<?= base_url('guru/mapel/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm">Input Mapel</a>
 											<a href="<?= base_url('guru/siswa/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm">Input Siswa</a>
 											<a href="<?= base_url('guru/nilai/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm">Input Nilai</a>

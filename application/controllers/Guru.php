@@ -27,7 +27,7 @@ class Guru extends CI_Controller
 			'judul' => 'Guru | Pengajaran',
 			'viewUtama' => 'guru/contents/pengajaran',
 			'cekUser' => $this->db->get_where('tb_autentikasi', ['username' => $this->session->userdata('username')])->row_array(), // cek user yang login berdasarkan session username,
-			'pengajaranS' => $this->pengajaran_m->getPengajaran()
+			'pengajaranS' => $this->pengajaran_m->getPengajaran()->result_array()
 		];
 		$this->load->view('guru/layouts/wrapperData', $data);
 	}
@@ -52,5 +52,132 @@ class Guru extends CI_Controller
 			$this->session->set_flashdata('success', 'Data berhasil dibuat.'); // Membuat pesan notif jika insert data berhasil
 			redirect('guru/pengajaran'); // redirect ke halaman pengajaran
 		}
+	}
+	public function mapel($pengajaran_id)
+	{
+		$data = [
+			'judul' => 'Guru | Mata Pelajaran',
+			'viewUtama' => 'guru/contents/mapel',
+			'cekUser' => $this->db->get_where('tb_autentikasi', ['username' => $this->session->userdata('username')])->row_array(), // cek user yang login berdasarkan session username,
+			'mata_pelajaranS' => $this->db->get('tb_data_mata_pelajaran')->result_array(),
+			'pengajaranMapelS' => $this->pengajaran_m->getPengajaranMapel($pengajaran_id),
+			'pengajaran_id' => $pengajaran_id
+		];
+		$this->load->view('guru/layouts/wrapperData', $data);
+	}
+	public function add_mapel($mapel_id)
+	{
+		$pengajaran_id = $this->input->post('pengajaran_id');
+
+		if ($this->pengajaran_m->simpanPengajaranMapel($mapel_id) == false) { // Insert data pengajaran
+			$this->session->set_flashdata('error', 'Mata pelajaran sudah dimasukkan'); // Membuat pesan notif jika insert data berhasil
+			redirect('guru/mapel/' . $pengajaran_id); // redirect ke halaman pengajaran
+		}
+		$this->session->set_flashdata('success', 'Mata pelajaran berhasil dibuat'); // Membuat pesan notif jika insert data berhasil
+		redirect('guru/mapel/' . $pengajaran_id); // redirect ke halaman pengajaran
+	}
+	public function remove_mapel($mapel_id)
+	{
+		$pengajaran_id = $this->input->post('pengajaran_id');
+
+		$this->pengajaran_m->hapusPengajaranMapel($mapel_id); // Delete data pengajaran
+		$this->session->set_flashdata('success', 'Mata pelajaran berhasil dihapus'); // Membuat pesan notif jika delete data berhasil
+		redirect('guru/mapel/' . $pengajaran_id); // redirect ke halaman pengajaran
+	}
+	public function siswa($pengajaran_id)
+	{
+		$data = [
+			'judul' => 'Guru | Siswa',
+			'viewUtama' => 'guru/contents/siswa',
+			'cekUser' => $this->db->get_where('tb_autentikasi', ['username' => $this->session->userdata('username')])->row_array(), // cek user yang login berdasarkan session username,
+			'siswaS' => $this->db->get('tb_data_siswa')->result_array(),
+			'pengajaranSiswaS' => $this->pengajaran_m->getPengajaranSiswa($pengajaran_id),
+			'pengajaran_id' => $pengajaran_id
+		];
+		$this->load->view('guru/layouts/wrapperData', $data);
+	}
+	public function add_siswa($siswa_id)
+	{
+		$pengajaran_id = $this->input->post('pengajaran_id');
+
+		if ($this->pengajaran_m->simpanPengajaranSiswa($siswa_id) == false) { // Insert data pengajaran
+			$this->session->set_flashdata('error', 'Siswa sudah dimasukkan'); // Membuat pesan notif jika insert data berhasil
+			redirect('guru/siswa/' . $pengajaran_id); // redirect ke halaman pengajaran
+		}
+		$this->session->set_flashdata('success', 'Siswa berhasil dibuat'); // Membuat pesan notif jika insert data berhasil
+		redirect('guru/siswa/' . $pengajaran_id); // redirect ke halaman pengajaran
+	}
+	public function remove_siswa($siswa_id)
+	{
+		$pengajaran_id = $this->input->post('pengajaran_id');
+
+		$this->pengajaran_m->hapusPengajaranSiswa($siswa_id); // Delete data pengajaran
+		$this->session->set_flashdata('success', 'Siswa berhasil dihapus'); // Membuat pesan notif jika delete data berhasil
+		redirect('guru/siswa/' . $pengajaran_id); // redirect ke halaman pengajaran
+	}
+	public function nilai($pengajaran_id)
+	{
+		$data = [
+			'judul' => 'Guru | Nilai',
+			'viewUtama' => 'guru/contents/nilai',
+			'cekUser' => $this->db->get_where('tb_autentikasi', ['username' => $this->session->userdata('username')])->row_array(), // cek user yang login berdasarkan session username,
+			'pengajaran' => $this->pengajaran_m->getPengajaran($pengajaran_id)->row_array(),
+			'pengajaranMapelS' => $this->pengajaran_m->getPengajaranMapel($pengajaran_id),
+			'pengajaranSiswaS' => $this->pengajaran_m->getPengajaranSiswa($pengajaran_id),
+			'pengajaran_id' => $pengajaran_id
+		];
+		$this->load->view('guru/layouts/wrapperData', $data);
+	}
+	public function input($pengajaran_id, $siswa_id)
+	{
+		$pengajaranMapelS = $this->pengajaran_m->getPengajaranMapel($pengajaran_id);
+		$siswa = $this->db->get_where('tb_data_siswa', ['id_siswa' => $siswa_id])->row_array();
+		// Parameter pertama untuk name input, Parameter kedua bebas, Parameter ketiga aturan input
+		foreach ($pengajaranMapelS as $pengajaranMapel) {
+			$this->form_validation->set_rules($pengajaranMapel['id_mapel'], 'Input', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+		}
+
+		// Jika validasi gagal, akan muncul error di input dan kembali ke halaman pengajaran
+		if ($this->form_validation->run() == FALSE) {
+			$pengajaran_siswa = $this->db->get_where('tb_pengajaran_siswa', ['pengajaran_id' => $pengajaran_id, 'siswa_id' => $siswa_id])->row_array();
+			if ($pengajaran_siswa) {
+				$data = [
+					'judul' => 'Guru | Nilai',
+					'viewUtama' => 'guru/contents/input',
+					'cekUser' => $this->db->get_where('tb_autentikasi', ['username' => $this->session->userdata('username')])->row_array(), // cek user yang login berdasarkan session username,
+					'pengajaran' => $this->pengajaran_m->getPengajaran($pengajaran_id)->row_array(),
+					'pengajaranMapelS' => $pengajaranMapelS,
+					'siswa' => $siswa,
+					'pengajaran_id' => $pengajaran_id
+				];
+				$this->load->view('guru/layouts/wrapperForm', $data);
+			}
+		} else {
+			foreach ($pengajaranMapelS as $pengajaranMapel) {
+				$data = [
+					'pengajaran_id' => $pengajaran_id,
+					'siswa_id' => $siswa_id,
+					'mapel_id' => $pengajaranMapel['mapel_id'],
+					'nilai' => $this->input->post($pengajaranMapel['id_mapel'])
+				];
+				$this->db->replace('tb_nilai', $data); // Insert data pengajaran
+			}
+			$this->session->set_flashdata('success', 'Nilai ' . $siswa['nama'] . ' berhasil di input.'); // Membuat pesan notif jika insert data berhasil
+			redirect('guru/nilai/' . $pengajaran_id); // redirect ke halaman pengajaran
+		}
+	}
+	public function lihat_nilai($pengajaran_id)
+	{
+		$data = [
+			'judul' => 'Guru | Nilai',
+			'viewUtama' => 'guru/contents/lihat_nilai',
+			'cekUser' => $this->db->get_where('tb_autentikasi', ['username' => $this->session->userdata('username')])->row_array(), // cek user yang login berdasarkan session username,
+			'pengajaran' => $this->pengajaran_m->getPengajaran($pengajaran_id)->row_array(),
+			'pengajaranMapelS' => $this->pengajaran_m->getPengajaranMapel($pengajaran_id),
+			'pengajaranSiswaS' => $this->pengajaran_m->getPengajaranSiswa($pengajaran_id),
+			'lihat_nilai' => $this->pengajaran_m->lihatNilai($pengajaran_id),
+			'pengajaran_id' => $pengajaran_id
+		];
+		$this->load->view('guru/layouts/wrapperData', $data);
 	}
 }
