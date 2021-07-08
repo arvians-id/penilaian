@@ -81,6 +81,16 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-6 col-md-4 col-lg-3">
+						<div class="card shadow-sm text-center">
+							<div class="card-body">
+								<a href="<?= base_url('/admin/pengajaran') ?>">
+									<i class="icon-Address-Book2 fa-3x"></i>
+									<h4 class="card-title">Kelola Pengajaran</h4>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

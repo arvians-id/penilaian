@@ -9,7 +9,9 @@ class Pengajaran_model extends CI_Model
 		$this->db->from('tb_pengajaran a');
 		$this->db->join('tb_autentikasi b', 'b.id = a.guru_id');
 		$this->db->join('tb_data_tahun_ajaran c', 'c.id_ta = a.ta_id');
-		$this->db->where('a.guru_id', $this->session->userdata('id'));
+		if ($this->session->userdata('role') == 'guru') {
+			$this->db->where('a.guru_id', $this->session->userdata('id'));
+		}
 		if ($pengajaran_id != null) {
 			$this->db->where('a.id_pengajaran', $pengajaran_id);
 		}
@@ -23,7 +25,9 @@ class Pengajaran_model extends CI_Model
 		$this->db->join('tb_autentikasi c', 'c.id = b.guru_id');
 		$this->db->join('tb_data_tahun_ajaran d', 'd.id_ta = b.ta_id');
 		$this->db->join('tb_data_mata_pelajaran e', 'e.id_mapel = a.mapel_id');
-		$this->db->where('b.guru_id', $this->session->userdata('id'));
+		if ($this->session->userdata('role') == 'guru') {
+			$this->db->where('b.guru_id', $this->session->userdata('id'));
+		}
 		$this->db->where('a.pengajaran_id', $pengajaran_id);
 		return $this->db->get()->result_array(); // tampilkan semua data
 	}
@@ -35,7 +39,9 @@ class Pengajaran_model extends CI_Model
 		$this->db->join('tb_autentikasi c', 'c.id = b.guru_id');
 		$this->db->join('tb_data_tahun_ajaran d', 'd.id_ta = b.ta_id');
 		$this->db->join('tb_data_siswa e', 'e.id_siswa = a.siswa_id');
-		$this->db->where('b.guru_id', $this->session->userdata('id'));
+		if ($this->session->userdata('role') == 'guru') {
+			$this->db->where('b.guru_id', $this->session->userdata('id'));
+		}
 		$this->db->where('a.pengajaran_id', $pengajaran_id);
 		return $this->db->get()->result_array(); // tampilkan semua data
 	}
@@ -83,8 +89,13 @@ class Pengajaran_model extends CI_Model
 		$this->db->join('tb_pengajaran b', 'b.id_pengajaran = a.pengajaran_id');
 		$this->db->join('tb_data_siswa c', 'c.id_siswa = a.siswa_id');
 		$this->db->join('tb_data_mata_pelajaran d', 'd.id_mapel = a.mapel_id');
-		$this->db->where('b.guru_id', $this->session->userdata('id'));
+		if ($this->session->userdata('role') == 'guru') {
+			$this->db->where('b.guru_id', $this->session->userdata('id'));
+		}
 		$this->db->where('a.pengajaran_id', $pengajaran_id);
 		return $this->db->get()->result_array(); // tampilkan semua data
+	}
+	public function pengajaranMapelExcel($pengajaran_id)
+	{
 	}
 }

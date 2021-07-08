@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 08:00 AM
+-- Generation Time: Jul 08, 2021 at 08:02 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
@@ -44,15 +44,6 @@ CREATE TABLE `tb_autentikasi` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_autentikasi`
---
-
-INSERT INTO `tb_autentikasi` (`id`, `username`, `password`, `role`, `nama`, `jenis_kelamin`, `tanggal_lahir`, `nip`, `pendidikan_terakhir`, `agama`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-06 02:39:24', '2021-07-06 02:39:27'),
-(2, 'guru', 'e10adc3949ba59abbe56e057f20f883e', 'guru', 'Widdy Arfiansyah', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-06 03:53:18', '2021-07-06 03:53:21'),
-(6, 'guru01', 'e10adc3949ba59abbe56e057f20f883e', 'guru', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -66,21 +57,6 @@ CREATE TABLE `tb_data_mata_pelajaran` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_data_mata_pelajaran`
---
-
-INSERT INTO `tb_data_mata_pelajaran` (`id_mapel`, `kode_mapel`, `mata_pelajaran`, `created_at`, `updated_at`) VALUES
-(1, 'BTQ', 'Baca Tulis Quran', '2021-07-06 04:44:52', '2021-07-06 04:44:52'),
-(2, 'FQH', 'Fiqih', '2021-07-06 04:52:14', '2021-07-06 04:52:14'),
-(3, 'HDS', 'Hadits', '2021-07-07 05:20:14', '2021-07-07 05:20:14'),
-(4, 'TRK', 'Tarikh', '2021-07-06 04:52:55', '2021-07-06 04:52:55'),
-(5, 'ARB', 'Bahasa Arab', '2021-07-06 04:53:07', '2021-07-06 04:53:07'),
-(6, 'AKH', 'Akhlaq', '2021-07-06 04:53:20', '2021-07-06 04:53:20'),
-(7, 'AQD', 'Aqidah', '2021-07-06 04:53:26', '2021-07-06 04:53:26'),
-(8, 'IML', 'Imla', '2021-07-07 05:20:24', '2021-07-07 05:20:24'),
-(9, 'PRK', 'Praktik', '2021-07-07 05:23:51', '2021-07-07 05:23:51');
 
 -- --------------------------------------------------------
 
@@ -99,20 +75,6 @@ CREATE TABLE `tb_data_siswa` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_data_siswa`
---
-
-INSERT INTO `tb_data_siswa` (`id_siswa`, `nama`, `jenis_kelamin`, `tanggal_lahir`, `nama_wali`, `tahun_masuk`, `created_at`, `updated_at`) VALUES
-(1, 'Widdy Arfiansyah', 'Laki-laki', '2021-07-06', 'Kepo', '2020', '2021-07-06 04:43:40', '2021-07-06 04:43:40'),
-(2, 'Agung Bimantara P', 'Laki-laki', '2021-07-06', 'Kepo', '2020', '2021-07-06 04:50:11', '2021-07-06 04:50:11'),
-(3, 'Mang Tamvan', 'Laki-laki', '2021-07-06', 'Kepo', '2020', '2021-07-06 04:50:21', '2021-07-06 04:50:21'),
-(4, 'Adela Greenfelder', 'Perempuan', '2021-07-06', 'Kepo', '2020', '2021-07-06 04:50:32', '2021-07-06 04:50:32'),
-(5, 'Lisa Anemon', 'Perempuan', '2021-07-07', 'Kepo', '2020', '2021-07-06 04:50:46', '2021-07-06 04:50:46'),
-(6, 'Waffer Roma', 'Laki-laki', '2021-07-06', 'Kepo', '2020', '2021-07-06 04:50:55', '2021-07-06 04:50:55'),
-(7, 'Udin Markudin', 'Laki-laki', '2021-07-06', 'Kepo', '2020', '2021-07-06 04:51:09', '2021-07-06 04:51:09'),
-(8, 'Asuna SAO', 'Perempuan', '2021-07-08', 'Kepo', '2020', '2021-07-07 05:07:09', '2021-07-07 05:07:09');
-
 -- --------------------------------------------------------
 
 --
@@ -126,14 +88,6 @@ CREATE TABLE `tb_data_tahun_ajaran` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_data_tahun_ajaran`
---
-
-INSERT INTO `tb_data_tahun_ajaran` (`id_ta`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`) VALUES
-(1, '2020/2021', '1', '2021-07-06 04:45:05', '2021-07-07 05:23:34'),
-(2, '2020/2021', '2', '2021-07-07 05:23:38', '2021-07-07 05:23:38');
 
 -- --------------------------------------------------------
 
@@ -249,31 +203,31 @@ ALTER TABLE `tb_pengajaran_siswa`
 -- AUTO_INCREMENT for table `tb_autentikasi`
 --
 ALTER TABLE `tb_autentikasi`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_data_mata_pelajaran`
 --
 ALTER TABLE `tb_data_mata_pelajaran`
-  MODIFY `id_mapel` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_mapel` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_data_siswa`
 --
 ALTER TABLE `tb_data_siswa`
-  MODIFY `id_siswa` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_siswa` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_data_tahun_ajaran`
 --
 ALTER TABLE `tb_data_tahun_ajaran`
-  MODIFY `id_ta` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_ta` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_pengajaran`
 --
 ALTER TABLE `tb_pengajaran`
-  MODIFY `id_pengajaran` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pengajaran` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

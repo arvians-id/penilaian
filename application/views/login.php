@@ -35,7 +35,11 @@
 			<div class="card-body">
 				<form method="POST">
 					<input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>" />
-					<h4 class="text-center">Sekolah Diniyyah Tarbiyyatul Falah</h4>
+					<a href="<?= base_url() ?>" class="text-center db">
+						<img src="<?= base_url('assets/layout/logo.png') ?>" alt="Home" width="180" />
+					</a>
+					<h3 class="text-center">SEKOLAH DINIYYAH TARBIYYATUL FALAH TUGU</h3>
+					<hr>
 					<?php if ($this->session->flashdata('success')) : ?>
 						<div class="alert alert-success mt-2" role="alert">
 							<?= $this->session->flashdata('success'); ?>
@@ -45,7 +49,6 @@
 							<?= $this->session->flashdata('error'); ?>
 						</div>
 					<?php endif; ?>
-					<hr>
 					<div class="form-group ">
 						<label>Username</label>
 						<div class="col-xs-12">
@@ -68,8 +71,7 @@
 					<hr>
 					<div class="form-group text-center">
 						<div class="col-xs-12 text-center">
-							<small>Kampung Pasirmuncang, RT. 16 RW. 05
-								<br>Bojonggenteng, Bojong Genteng, Sukabumi
+							<small>Kp. Tugu Rt02/04 Desa Caringin Wetan Kec. Caringin
 								<br>Sukabumi Regency, Jawa Barat 43353, Indonesia
 							</small>
 						</div>

@@ -38,7 +38,7 @@ class Login extends CI_Controller
 				$cekUser['role'] == 'admin' ? redirect('admin') : redirect('guru');
 			}
 			$this->session->set_flashdata('error', 'Username atau password salah!');
-			redirect('login');
+			redirect('');
 		}
 	}
 	public function logout()
@@ -48,6 +48,6 @@ class Login extends CI_Controller
 		$this->session->unset_userdata($data);
 		// Kembalikan ke halaman login lagi setelah session dihapus
 		$this->session->set_flashdata('success', 'Anda berhasil keluar.');
-		redirect('login');
+		redirect('');
 	}
 }

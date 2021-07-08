@@ -2,7 +2,7 @@
 	<nav class="navbar top-navbar navbar-expand-md navbar-light">
 		<a class="navbar-brand" href="/">
 			<span class="text-secondary">
-				<img src="<?= base_url() ?>assets/layout/logo.png" width="100" alt="Logo" class="light-logo" />
+				<img src="<?= base_url() ?>assets/layout/logo.png" width="80" alt="Logo" class="light-logo" />
 			</span>
 		</a>
 		<div class="navbar-collapse">

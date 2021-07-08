@@ -49,7 +49,7 @@
 						</div>
 						<div class="form-group">
 							<label>Pendidikan Terakhir</label>
-							<input type="text" class="form-control <?= form_error('pendidikan_terakhir') ? 'is-invalid' : '' ?>" name="pendidikan_terakhir" value="<?= set_value('pendidikan_terakhir') ?>" placeholder="contoh: S1,S2">
+							<input type="text" class="form-control <?= form_error('pendidikan_terakhir') ? 'is-invalid' : '' ?>" name="pendidikan_terakhir" value="<?= set_value('pendidikan_terakhir') ?>" placeholder="contoh: S1">
 							<div class="invalid-feedback"><?= form_error('pendidikan_terakhir') ?></div>
 						</div>
 						<div class="form-group">

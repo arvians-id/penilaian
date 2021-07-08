@@ -17,7 +17,7 @@
 				<div class="ribbon ribbon-bookmark ribbon-default">Data Nilai</div>
 				<div class="card-body">
 					<div class="text-center">
-						<h3>DAFTAR HASIL TES BELAJAR DINIYYAH TARBIYYATUL FALAAH TUGU</h3>
+						<h3>DAFTAR HASIL TES BELAJAR DINIYYAH TARBIYYATUL FALAH TUGU</h3>
 						<h3>SEMESTER <?= $pengajaran['semester'] ?> TAHUN AJARAN <?= $pengajaran['tahun_ajaran'] ?> </h3>
 						<h3>KELAS <?= $pengajaran['kelas'] ?> </h3>
 					</div>
@@ -76,13 +76,11 @@
 												AND `tb_nilai`.`siswa_id` = $siswa
 												GROUP BY `tb_nilai`.`siswa_id`
 										";
-										$cariTotal = $this->db->query($queryAs)->result_array();
+										$cari = $this->db->query($queryAs)->row_array();
 										?>
-										<?php if (!empty($cariTotal)) : ?>
-											<?php foreach ($cariTotal as $cari) : ?>
-												<td><?= $cari['jumlah'] ?></td>
-												<td><?= round($cari['total'], 1) ?></td>
-											<?php endforeach ?>
+										<?php if (!empty($cari)) : ?>
+											<td><?= $cari['jumlah'] ?></td>
+											<td><?= round($cari['total'], 1) ?></td>
 										<?php else : ?>
 											<td></td>
 											<td></td>
@@ -133,11 +131,9 @@
 							</tr>
 						</tbody>
 					</table>
-					<button class="btn btn-secondary btn-sm">Export to Excel</button>
-					<button class="btn btn-secondary btn-sm">Export to PDF</button>
+					<a href="<?= base_url('guru/excel/' . $pengajaran_id) ?>" class="btn btn-secondary btn-sm">Export to Excel</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<script src="<?= base_url() ?>assets/template/adminwrap/assets/node_modules/jquery/jquery.min.js"></script>

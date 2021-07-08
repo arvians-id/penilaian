@@ -15,11 +15,7 @@
 						<li><a href="<?= base_url('admin/tahun_ajaran') ?>">Tahun Ajaran</a></li>
 					</ul>
 				</li>
-				<li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i class="icon-Mail-Read"></i><span class="hide-menu">Kelola Laporan</span></a>
-					<ul aria-expanded="false" class="collapse">
-						<li><a href="<?= base_url('admin/laporan_siswa') ?>">Nilai Siswa</a></li>
-					</ul>
-				</li>
+				<li> <a class="waves-effect waves-dark" href="<?= base_url('admin/pengajaran') ?>" aria-expanded="false"><i class="icon-Address-Book2"></i><span class="hide-menu">Pengajaran</span></a></li>
 				<li> <a class="waves-effect waves-dark" href="<?= base_url('admin/profil') ?>" aria-expanded="false"><i class="icon-User"></i><span class="hide-menu">Profil</span></a></li>
 				<li> <a class="waves-effect waves-dark" href="<?= base_url('login/logout') ?>" aria-expanded="false"><i class="icon-Power-2"></i><span class="hide-menu">Keluar</span></a></li>
 			</ul>
