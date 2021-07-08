@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<!-- Favicon icon -->
-	<link rel="icon" type="image/x-icon" sizes="16x20" href="<?= base_url() ?>assets/template/adminwrap/assets/images/pn-icon.ico">
+	<link rel="icon" type="image/x-icon" sizes="16x20" href="<?= base_url() ?>assets/layout/logo.ico">
 	<title><?= $judul ?></title>
 	<link href="<?= base_url() ?>assets/template/adminwrap/assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<!-- toast CSS -->

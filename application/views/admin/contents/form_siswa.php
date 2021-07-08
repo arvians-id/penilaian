@@ -3,9 +3,9 @@
 		<div class="col-md-5 align-self-center">
 			<h3 class="text-themecolor">Siswa</h3>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+				<li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Admin</a></li>
 				<li class="breadcrumb-item"><a href="<?= base_url('admin/siswa') ?>">Kelola Siswa</a></li>
-				<li class="breadcrumb-item active">Buat Siswa</li>
+				<li class="breadcrumb-item active">Buat/Ubah Siswa</li>
 			</ol>
 		</div>
 	</div>

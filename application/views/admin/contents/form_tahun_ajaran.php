@@ -3,9 +3,9 @@
 		<div class="col-md-5 align-self-center">
 			<h3 class="text-themecolor">Tahun Ajaran</h3>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+				<li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Admin</a></li>
 				<li class="breadcrumb-item"><a href="<?= base_url('admin/tahun_ajaran') ?>">Kelola Tahun Ajaran</a></li>
-				<li class="breadcrumb-item active">Buat Tahun Ajaran</li>
+				<li class="breadcrumb-item active">Buat/Ubah Tahun Ajaran</li>
 			</ol>
 		</div>
 	</div>

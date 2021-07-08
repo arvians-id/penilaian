@@ -3,7 +3,7 @@
 		<div class="col-md-5 align-self-center">
 			<h3 class="text-themecolor">Nilai</h3>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/pengguna">Admin</a></li>
+				<li class="breadcrumb-item"><a href="<?= base_url('guru') ?>">Guru</a></li>
 				<li class="breadcrumb-item"><a href="<?= base_url('guru/pengajaran') ?>">Kelola Pengajaran</a></li>
 				<li class="breadcrumb-item"><a href="<?= base_url('guru/nilai/' . $pengajaran_id) ?>">Detail Pengajaran</a></li>
 				<li class="breadcrumb-item active">Nilai</li>
@@ -21,7 +21,7 @@
 						<h3>SEMESTER <?= $pengajaran['semester'] ?> TAHUN AJARAN <?= $pengajaran['tahun_ajaran'] ?> </h3>
 						<h3>KELAS <?= $pengajaran['kelas'] ?> </h3>
 					</div>
-					<table class="table table-bordered table-hover">
+					<table class="table table-bordered table-hover table-responsive-xl">
 						<tbody>
 							<tr>
 								<td rowspan="2" style="vertical-align : middle;text-align:center;">No</td>

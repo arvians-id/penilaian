@@ -3,7 +3,7 @@
 		<div class="col-md-5 align-self-center">
 			<h3 class="text-themecolor">Mata Pelajaran</h3>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/pengguna">Admin</a></li>
+				<li class="breadcrumb-item"><a href="<?= base_url('guru') ?>">Guru</a></li>
 				<li class="breadcrumb-item"><a href="<?= base_url('guru/pengajaran') ?>">Kelola Pengajaran</a></li>
 				<li class="breadcrumb-item active">Mata Pelajaran</li>
 			</ol>
@@ -31,11 +31,11 @@
 						</div>
 					<?php endif; ?>
 					<div class="row">
-						<div class="col-6">
+						<div class="col-12 col-lg-6">
 							<h3>Semua Data Mata Pelajaran</h3>
 							<hr>
 							<div class="table-responsive">
-								<table id="all-table" data-all="all" class="table display table-bordered table-striped no-wrap">
+								<table id="all-table" class="table display table-bordered table-striped no-wrap">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -73,11 +73,11 @@
 								</table>
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-12 col-lg-6">
 							<h3>Mata Pelajaran Yang Diambil</h3>
 							<hr>
 							<div class="table-responsive">
-								<table id="all-table" data-all="all" class="table display table-bordered table-striped no-wrap">
+								<table id="my-table" class="table display table-bordered table-striped no-wrap">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -122,3 +122,23 @@
 	</div>
 </div>
 <script src="<?= base_url() ?>assets/template/adminwrap/assets/node_modules/jquery/jquery.min.js"></script>
+<script>
+	$(function() {
+		$('#all-table').DataTable({
+			"autoWidth": false,
+			"responsive": true,
+			"columnDefs": [{
+				"targets": [-1],
+				"orderable": false
+			}]
+		})
+		$('#my-table').DataTable({
+			"autoWidth": false,
+			"responsive": true,
+			"columnDefs": [{
+				"targets": [-1],
+				"orderable": false
+			}]
+		})
+	});
+</script>

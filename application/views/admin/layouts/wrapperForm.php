@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<!-- Favicon icon -->
-	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/template/adminwrap/assets/images/favicon.png">
+	<link rel="icon" type="image/x-icon" sizes="16x20" href="<?= base_url() ?>assets/layout/logo.ico">
 	<title><?= $judul ?></title>
 	<link rel="canonical" href="https://www.wrappixel.com/templates/adminwrap/" />
 	<!-- Bootstrap Core CSS -->

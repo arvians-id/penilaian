@@ -3,7 +3,7 @@
 		<div class="col-md-5 align-self-center">
 			<h3 class="text-themecolor">Guru</h3>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/pengguna">Admin</a></li>
+				<li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Admin</a></li>
 				<li class="breadcrumb-item active">Kelola Guru</li>
 			</ol>
 		</div>

@@ -3,9 +3,9 @@
 		<div class="col-md-5 align-self-center">
 			<h3 class="text-themecolor">Guru</h3>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+				<li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Admin</a></li>
 				<li class="breadcrumb-item"><a href="<?= base_url('admin/guru') ?>">Kelola Guru</a></li>
-				<li class="breadcrumb-item active">Buat Guru</li>
+				<li class="breadcrumb-item active">Buat/Ubah Guru</li>
 			</ol>
 		</div>
 	</div>
@@ -15,7 +15,7 @@
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">Buat Data Guru</h4>
-					<h6 class="card-subtitle"> Data guru ini akan sekaligus membuat akun otomatis, dengan password sesuai tanggal lahir. </h6>
+					<h6 class="card-subtitle">Data guru ini akan sekaligus membuat akun otomatis, dengan password sesuai tanggal lahir. </h6>
 					<hr>
 					<form class="mt-4" method="POST">
 						<div class="form-group">

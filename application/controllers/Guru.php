@@ -124,7 +124,7 @@ class Guru extends CI_Controller
 	public function nilai($pengajaran_id)
 	{
 		$data = [
-			'judul' => 'Guru | Nilai',
+			'judul' => 'Guru | Detail Pengajaran',
 			'viewUtama' => 'guru/contents/nilai',
 			'cekUser' => $this->db->get_where('tb_autentikasi', ['username' => $this->session->userdata('username')])->row_array(), // cek user yang login berdasarkan session username,
 			'pengajaran' => $this->pengajaran_m->getPengajaran($pengajaran_id)->row_array(),
@@ -140,7 +140,7 @@ class Guru extends CI_Controller
 		$siswa = $this->db->get_where('tb_data_siswa', ['id_siswa' => $siswa_id])->row_array();
 		// Parameter pertama untuk name input, Parameter kedua bebas, Parameter ketiga aturan input
 		foreach ($pengajaranMapelS as $pengajaranMapel) {
-			$this->form_validation->set_rules($pengajaranMapel['id_mapel'], 'Input', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+			$this->form_validation->set_rules($pengajaranMapel['id_mapel'], 'Input', 'numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
 		}
 
 		// Jika validasi gagal, akan muncul error di input dan kembali ke halaman pengajaran
@@ -148,7 +148,7 @@ class Guru extends CI_Controller
 			$pengajaran_siswa = $this->db->get_where('tb_pengajaran_siswa', ['pengajaran_id' => $pengajaran_id, 'siswa_id' => $siswa_id])->row_array();
 			if ($pengajaran_siswa) {
 				$data = [
-					'judul' => 'Guru | Nilai',
+					'judul' => 'Guru | Input Nilai',
 					'viewUtama' => 'guru/contents/input',
 					'cekUser' => $this->db->get_where('tb_autentikasi', ['username' => $this->session->userdata('username')])->row_array(), // cek user yang login berdasarkan session username,
 					'pengajaran' => $this->pengajaran_m->getPengajaran($pengajaran_id)->row_array(),

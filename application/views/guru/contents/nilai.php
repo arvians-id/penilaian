@@ -3,7 +3,7 @@
 		<div class="col-md-5 align-self-center">
 			<h3 class="text-themecolor">Detail Pengajaran</h3>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/pengguna">Admin</a></li>
+				<li class="breadcrumb-item"><a href="<?= base_url('guru') ?>">Guru</a></li>
 				<li class="breadcrumb-item"><a href="<?= base_url('guru/pengajaran') ?>">Kelola Pengajaran</a></li>
 				<li class="breadcrumb-item active">Detail Pengajaran</li>
 			</ol>
