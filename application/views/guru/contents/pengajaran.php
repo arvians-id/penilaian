@@ -42,6 +42,7 @@
 									<th>Nama Guru</th>
 									<th>Tahun Ajaran</th>
 									<th>Semester</th>
+									<th>Kelas</th>
 									<th style="text-align:center">Aksi</th>
 								</tr>
 							</thead>
@@ -53,11 +54,12 @@
 										<td><?= $pengajaran['nama'] ?></td>
 										<td><?= $pengajaran['tahun_ajaran'] ?></td>
 										<td><?= $pengajaran['semester'] ?></td>
+										<td><?= $pengajaran['kelas'] ?></td>
 										<td style="text-align:center">
-											<a href="<?= base_url('guru/mapel/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm">Input Mapel</a>
-											<a href="<?= base_url('guru/siswa/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm">Input Siswa</a>
-											<a href="<?= base_url('guru/nilai/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm">Input Nilai</a>
-											<a href="<?= base_url('guru/laporan/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm">Laporan</a>
+											<a href="<?= base_url('guru/nilai/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm"><i class="icon-File-Search"></i> Detail</a>
+											<a href="<?= base_url('guru/mapel/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm"><i class="icon-Pen-2"></i> Input Mapel</a>
+											<a href="<?= base_url('guru/siswa/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm"><i class="icon-Pen-2"></i> Input Siswa</a>
+											<a href="<?= base_url('guru/hapus/' . $pengajaran['id_pengajaran']) ?>" class="btn btn-secondary btn-sm" onclick="return confirm('Jika anda menghapus pengajaran ini, maka anda setuju akan hilangnya semua data yang ada pada pengajaran ini');"><i class="icon-Delete-File"></i> Hapus</a>
 										</td>
 									</tr>
 								<?php endforeach ?>
@@ -75,6 +77,10 @@
 		$('#all-table').DataTable({
 			"autoWidth": false,
 			"responsive": true,
+			"columnDefs": [{
+				"targets": [-1],
+				"orderable": false
+			}]
 		})
 	});
 </script>

@@ -53,6 +53,12 @@ class Guru extends CI_Controller
 			redirect('guru/pengajaran'); // redirect ke halaman pengajaran
 		}
 	}
+	public function hapus($id_pengajaran)
+	{
+		$this->db->delete('tb_pengajaran', ['id_pengajaran' => $id_pengajaran]);
+		$this->session->set_flashdata('success', 'Pengajaran berhasil dihapus.'); // Membuat pesan notif jika insert data berhasil
+		redirect('guru/pengajaran'); // redirect ke halaman pengajaran
+	}
 	public function mapel($pengajaran_id)
 	{
 		$data = [

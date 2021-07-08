@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2021 at 08:13 PM
+-- Generation Time: Jul 08, 2021 at 08:00 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
@@ -142,9 +142,9 @@ INSERT INTO `tb_data_tahun_ajaran` (`id_ta`, `tahun_ajaran`, `semester`, `create
 --
 
 CREATE TABLE `tb_nilai` (
-  `id_nilai` int(11) NOT NULL,
-  `pm_id` bigint(20) NOT NULL,
-  `ps_id` bigint(20) NOT NULL,
+  `pengajaran_id` bigint(20) NOT NULL,
+  `siswa_id` bigint(20) NOT NULL,
+  `mapel_id` bigint(20) NOT NULL,
   `nilai` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -161,13 +161,6 @@ CREATE TABLE `tb_pengajaran` (
   `kelas` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_pengajaran`
---
-
-INSERT INTO `tb_pengajaran` (`id_pengajaran`, `guru_id`, `ta_id`, `kelas`) VALUES
-(1, 2, 1, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -175,7 +168,6 @@ INSERT INTO `tb_pengajaran` (`id_pengajaran`, `guru_id`, `ta_id`, `kelas`) VALUE
 --
 
 CREATE TABLE `tb_pengajaran_mapel` (
-  `id_pm` int(11) NOT NULL,
   `pengajaran_id` bigint(20) NOT NULL,
   `mapel_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -187,7 +179,6 @@ CREATE TABLE `tb_pengajaran_mapel` (
 --
 
 CREATE TABLE `tb_pengajaran_siswa` (
-  `id_ps` bigint(20) NOT NULL,
   `pengajaran_id` bigint(20) NOT NULL,
   `siswa_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -224,25 +215,31 @@ ALTER TABLE `tb_data_tahun_ajaran`
 -- Indexes for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  ADD PRIMARY KEY (`id_nilai`);
+  ADD PRIMARY KEY (`pengajaran_id`,`siswa_id`,`mapel_id`),
+  ADD KEY `tb_nilai_ibfk_3` (`siswa_id`),
+  ADD KEY `tb_nilai_ibfk_4` (`mapel_id`);
 
 --
 -- Indexes for table `tb_pengajaran`
 --
 ALTER TABLE `tb_pengajaran`
-  ADD PRIMARY KEY (`id_pengajaran`);
+  ADD PRIMARY KEY (`id_pengajaran`),
+  ADD KEY `guru_id` (`guru_id`),
+  ADD KEY `ta_id` (`ta_id`);
 
 --
 -- Indexes for table `tb_pengajaran_mapel`
 --
 ALTER TABLE `tb_pengajaran_mapel`
-  ADD PRIMARY KEY (`id_pm`);
+  ADD PRIMARY KEY (`pengajaran_id`,`mapel_id`),
+  ADD KEY `tb_pengajaran_mapel_ibfk_1` (`mapel_id`);
 
 --
 -- Indexes for table `tb_pengajaran_siswa`
 --
 ALTER TABLE `tb_pengajaran_siswa`
-  ADD PRIMARY KEY (`id_ps`);
+  ADD PRIMARY KEY (`pengajaran_id`,`siswa_id`),
+  ADD KEY `tb_pengajaran_siswa_ibfk_2` (`siswa_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -273,28 +270,43 @@ ALTER TABLE `tb_data_tahun_ajaran`
   MODIFY `id_ta` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tb_nilai`
---
-ALTER TABLE `tb_nilai`
-  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tb_pengajaran`
 --
 ALTER TABLE `tb_pengajaran`
-  MODIFY `id_pengajaran` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pengajaran` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tb_pengajaran_mapel`
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_nilai`
+--
+ALTER TABLE `tb_nilai`
+  ADD CONSTRAINT `tb_nilai_ibfk_2` FOREIGN KEY (`pengajaran_id`) REFERENCES `tb_pengajaran` (`id_pengajaran`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_nilai_ibfk_3` FOREIGN KEY (`siswa_id`) REFERENCES `tb_pengajaran_siswa` (`siswa_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_nilai_ibfk_4` FOREIGN KEY (`mapel_id`) REFERENCES `tb_pengajaran_mapel` (`mapel_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_pengajaran`
+--
+ALTER TABLE `tb_pengajaran`
+  ADD CONSTRAINT `tb_pengajaran_ibfk_1` FOREIGN KEY (`guru_id`) REFERENCES `tb_autentikasi` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_pengajaran_ibfk_2` FOREIGN KEY (`ta_id`) REFERENCES `tb_data_tahun_ajaran` (`id_ta`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_pengajaran_mapel`
 --
 ALTER TABLE `tb_pengajaran_mapel`
-  MODIFY `id_pm` int(11) NOT NULL AUTO_INCREMENT;
+  ADD CONSTRAINT `tb_pengajaran_mapel_ibfk_1` FOREIGN KEY (`mapel_id`) REFERENCES `tb_data_mata_pelajaran` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_pengajaran_mapel_ibfk_2` FOREIGN KEY (`pengajaran_id`) REFERENCES `tb_pengajaran` (`id_pengajaran`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- AUTO_INCREMENT for table `tb_pengajaran_siswa`
+-- Constraints for table `tb_pengajaran_siswa`
 --
 ALTER TABLE `tb_pengajaran_siswa`
-  MODIFY `id_ps` bigint(20) NOT NULL AUTO_INCREMENT;
+  ADD CONSTRAINT `tb_pengajaran_siswa_ibfk_1` FOREIGN KEY (`pengajaran_id`) REFERENCES `tb_pengajaran` (`id_pengajaran`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_pengajaran_siswa_ibfk_2` FOREIGN KEY (`siswa_id`) REFERENCES `tb_data_siswa` (`id_siswa`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

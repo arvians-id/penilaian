@@ -1,10 +1,11 @@
 <div class="container-fluid">
 	<div class="row page-titles">
 		<div class="col-md-5 align-self-center">
-			<h3 class="text-themecolor">Pengajaran Mata Pelajaran</h3>
+			<h3 class="text-themecolor">Mata Pelajaran</h3>
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="/pengguna">Admin</a></li>
-				<li class="breadcrumb-item active">Kelola Pengajaran Mata Pelajaran</li>
+				<li class="breadcrumb-item"><a href="<?= base_url('guru/pengajaran') ?>">Kelola Pengajaran</a></li>
+				<li class="breadcrumb-item active">Mata Pelajaran</li>
 			</ol>
 		</div>
 	</div>
@@ -12,7 +13,7 @@
 		<div class="col-12">
 			<!-- table responsive -->
 			<div class="card ribbon-wrapper">
-				<div class="ribbon ribbon-bookmark ribbon-default">Data Pengajaran Mata Pelajaran</div>
+				<div class="ribbon ribbon-bookmark ribbon-default">Data Mata Pelajaran Anda</div>
 				<div class="card-body">
 					<?php if ($this->session->flashdata('success')) : ?>
 						<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -31,7 +32,7 @@
 					<?php endif; ?>
 					<div class="row">
 						<div class="col-6">
-							<h3>Data Mata Pelajaran</h3>
+							<h3>Semua Data Mata Pelajaran</h3>
 							<hr>
 							<div class="table-responsive">
 								<table id="all-table" data-all="all" class="table display table-bordered table-striped no-wrap">
@@ -73,7 +74,7 @@
 							</div>
 						</div>
 						<div class="col-6">
-							<h3>Mata Pelajaran yang Anda Ambil</h3>
+							<h3>Mata Pelajaran Yang Diambil</h3>
 							<hr>
 							<div class="table-responsive">
 								<table id="all-table" data-all="all" class="table display table-bordered table-striped no-wrap">
@@ -102,7 +103,7 @@
 													<td><?= $pengajaranMapel['kode_mapel'] ?></td>
 													<td><?= $pengajaranMapel['mata_pelajaran'] ?></td>
 													<td style="text-align:center">
-														<form action="<?= base_url('guru/remove_mapel/' . $pengajaranMapel['mapel_id']) ?>" method="POST">
+														<form action="<?= base_url('guru/remove_mapel/' . $pengajaranMapel['mapel_id']) ?>" method="POST" onsubmit="return confirm('Jika anda menghapus mata pelajaran ini, maka anda setuju akan hilangnya data nilai pada siswa yang bersangkutan dengan mata pelajaran ini. Namun anda tidak perlu khawatir, data mata pelajaran di dalam pengajaran lain tidak akan ikut terhapus.');">
 															<input type="hidden" name="pengajaran_id" value="<?= $pengajaran_id ?>">
 															<button type="submit" class="btn btn-secondary btn-sm">-</button>
 														</form>

@@ -1,10 +1,11 @@
 <div class="container-fluid">
 	<div class="row page-titles">
 		<div class="col-md-5 align-self-center">
-			<h3 class="text-themecolor">Nilai Siswa</h3>
+			<h3 class="text-themecolor">Detail Pengajaran</h3>
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="/pengguna">Admin</a></li>
-				<li class="breadcrumb-item active">Kelola Nilai Siswa</li>
+				<li class="breadcrumb-item"><a href="<?= base_url('guru/pengajaran') ?>">Kelola Pengajaran</a></li>
+				<li class="breadcrumb-item active">Detail Pengajaran</li>
 			</ol>
 		</div>
 	</div>
@@ -12,17 +13,20 @@
 		<div class="col-12">
 			<!-- table responsive -->
 			<div class="card ribbon-wrapper">
-				<div class="ribbon ribbon-bookmark ribbon-default">Data Nilai</div>
+				<div class="ribbon ribbon-bookmark ribbon-default">Detail Pengajaran</div>
 				<div class="card-body">
 					<div class="row">
-						<div class="col-4">
+						<div class="col-12 col-lg-3">
 							<h3>Nama Guru : <?= $pengajaran['nama'] ?></h3>
 						</div>
-						<div class="col-4">
+						<div class="col-12 col-lg-3">
 							<h3>Tahun Ajaran : <?= $pengajaran['tahun_ajaran'] ?></h3>
 						</div>
-						<div class="col-4">
+						<div class="col-12 col-lg-3">
 							<h3>Semester : <?= $pengajaran['semester'] ?></h3>
+						</div>
+						<div class="col-12 col-lg-3">
+							<h3>Kelas : <?= $pengajaran['kelas'] ?></h3>
 						</div>
 					</div>
 					<hr>
@@ -115,6 +119,10 @@
 		$('#all-table').DataTable({
 			"autoWidth": false,
 			"responsive": true,
+			"columnDefs": [{
+				"targets": [-1],
+				"orderable": false
+			}]
 		})
 	});
 </script>
