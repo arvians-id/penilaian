@@ -287,6 +287,7 @@ class Admin extends CI_Controller
 	}
 	public function excel($pengajaran_id)
 	{
+		$pengajaran =  $this->pengajaran_m->getPengajaran($pengajaran_id)->row_array();
 		$pengajaranMapelS = $this->pengajaran_m->getPengajaranMapel($pengajaran_id);
 		$pengajaranSiswaS = $this->pengajaran_m->getPengajaranSiswa($pengajaran_id);
 		// Ini Instance untuk export Excel
@@ -335,7 +336,7 @@ class Admin extends CI_Controller
 					$excel->setActiveSheetIndex(0)
 						->setCellValue(chr($noB++) . $column, $nilai['nilai']);
 				}
-				$queryAs = "SELECT *,SUM(nilai) as jumlah, AVG(nilai) as total
+				$queryAs = "SELECT SUM(nilai) as jumlah, AVG(nilai) as total
 								FROM `tb_nilai`
 								JOIN `tb_pengajaran` ON `tb_pengajaran`.`id_pengajaran` = `tb_nilai`.`pengajaran_id`
 								JOIN `tb_data_siswa` ON `tb_data_siswa`.`id_siswa` = `tb_nilai`.`siswa_id`
@@ -356,7 +357,7 @@ class Admin extends CI_Controller
 				->setCellValue('A' . $column, 'Jumlah');
 			foreach ($pengajaranMapelS as $pengajaranMapel) {
 				$mapel = $pengajaranMapel['mapel_id'];
-				$queryJml = "SELECT *,SUM(nilai) as jumlah
+				$queryJml = "SELECT SUM(nilai) as jumlah
 							FROM `tb_nilai`
 							JOIN `tb_pengajaran` ON `tb_pengajaran`.`id_pengajaran` = `tb_nilai`.`pengajaran_id`
 							JOIN `tb_data_mata_pelajaran` ON `tb_data_mata_pelajaran`.`id_mapel` = `tb_nilai`.`mapel_id`
@@ -375,7 +376,7 @@ class Admin extends CI_Controller
 				->setCellValue('A' . ($column + 1), 'Rata-Rata Kelas');
 			foreach ($pengajaranMapelS as $pengajaranMapel) {
 				$mapel = $pengajaranMapel['mapel_id'];
-				$queryJml = "SELECT *,AVG(nilai) as rata
+				$queryJml = "SELECT AVG(nilai) as rata
 							FROM `tb_nilai`
 							JOIN `tb_pengajaran` ON `tb_pengajaran`.`id_pengajaran` = `tb_nilai`.`pengajaran_id`
 							JOIN `tb_data_mata_pelajaran` ON `tb_data_mata_pelajaran`.`id_mapel` = `tb_nilai`.`mapel_id`
@@ -389,6 +390,13 @@ class Admin extends CI_Controller
 						->setCellValue(chr($noB++) . ($column + 1), round($cari['rata'], 1));
 				}
 			}
+			$noB = 67;
+			$excel->setActiveSheetIndex(0)
+				->setCellValue('A' . ($column + 3), 'DAFTAR HASIL TES BELAJAR DINIYYAH TARBIYYATUL FALAH TUGU');
+			$excel->setActiveSheetIndex(0)
+				->setCellValue('A' . ($column + 4), 'SEMESTER ' . $pengajaran['semester'] . ' TAHUN AJARAN ' . $pengajaran['tahun_ajaran']);
+			$excel->setActiveSheetIndex(0)
+				->setCellValue('A' . ($column + 5), 'KELAS ' . $pengajaran['kelas']);
 		}
 		$writer = new Xlsx($excel);
 		$fileName = bin2hex(random_bytes(12));

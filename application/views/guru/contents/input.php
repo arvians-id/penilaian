@@ -80,7 +80,7 @@
 							<input type="hidden" name="pengajaran_id" value="<?= $pengajaran_id ?>">
 							<div class="form-group">
 								<label><?= $pengajaranMapel['mata_pelajaran'] ?></label>
-								<input type="text" name="<?= $pengajaranMapel['id_mapel'] ?>" class="form-control <?= form_error($pengajaranMapel['id_mapel']) ? 'is-invalid' : '' ?>" value="<?= set_value($pengajaranMapel['id_mapel'], $nilai['nilai']) ?>">
+								<input type="text" name="<?= $pengajaranMapel['id_mapel'] ?>" class="form-control <?= form_error($pengajaranMapel['id_mapel']) ? 'is-invalid' : '' ?>" value="<?= set_value($pengajaranMapel['id_mapel'], isset($nilai['nilai']) ? $nilai['nilai'] : null) ?>">
 								<div class="invalid-feedback"><?= form_error($pengajaranMapel['id_mapel']) ?></div>
 							</div>
 						<?php endforeach ?>

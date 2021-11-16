@@ -139,11 +139,8 @@ class Guru extends CI_Controller
 	public function add_siswa($siswa_id)
 	{
 		$pengajaran_id = $this->input->post('pengajaran_id');
+		$this->pengajaran_m->simpanPengajaranSiswa($siswa_id, $pengajaran_id);
 
-		if ($this->pengajaran_m->simpanPengajaranSiswa($siswa_id) == false) { // Insert data pengajaran
-			$this->session->set_flashdata('error', 'Siswa sudah dimasukkan'); // Membuat pesan notif jika insert data berhasil
-			redirect('guru/siswa/' . $pengajaran_id); // redirect ke halaman pengajaran
-		}
 		$this->session->set_flashdata('success', 'Siswa berhasil dibuat'); // Membuat pesan notif jika insert data berhasil
 		redirect('guru/siswa/' . $pengajaran_id); // redirect ke halaman pengajaran
 	}
@@ -222,6 +219,7 @@ class Guru extends CI_Controller
 	}
 	public function excel($pengajaran_id)
 	{
+		$pengajaran =  $this->pengajaran_m->getPengajaran($pengajaran_id)->row_array();
 		$pengajaranMapelS = $this->pengajaran_m->getPengajaranMapel($pengajaran_id);
 		$pengajaranSiswaS = $this->pengajaran_m->getPengajaranSiswa($pengajaran_id);
 		// Ini Instance untuk export Excel
@@ -324,6 +322,13 @@ class Guru extends CI_Controller
 						->setCellValue(chr($noB++) . ($column + 1), round($cari['rata'], 1));
 				}
 			}
+			$noB = 67;
+			$excel->setActiveSheetIndex(0)
+				->setCellValue('A' . ($column + 3), 'DAFTAR HASIL TES BELAJAR DINIYYAH TARBIYYATUL FALAH TUGU');
+			$excel->setActiveSheetIndex(0)
+				->setCellValue('A' . ($column + 4), 'SEMESTER ' . $pengajaran['semester'] . ' TAHUN AJARAN ' . $pengajaran['tahun_ajaran']);
+			$excel->setActiveSheetIndex(0)
+				->setCellValue('A' . ($column + 5), 'KELAS ' . $pengajaran['kelas']);
 		}
 		$writer = new Xlsx($excel);
 		$fileName = bin2hex(random_bytes(12));

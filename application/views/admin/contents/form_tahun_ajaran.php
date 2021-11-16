@@ -25,7 +25,11 @@
 						</div>
 						<div class="form-group">
 							<label>Semester</label>
-							<input type="text" class="form-control <?= form_error('semester') ? 'is-invalid' : '' ?>" name="semester" value="<?= set_value('semester', isset($tahun_ajaran['semester']) ? $tahun_ajaran['semester'] : '') ?>" placeholder="contoh: 1">
+							<select class="form-control <?= form_error('semester') ? 'is-invalid' : '' ?>" name="semester">
+								<option value="" disabled selected>Pilih</option>
+								<option value="1" <?= set_value('semester', isset($tahun_ajaran['semester']) ? $tahun_ajaran['semester'] : '') != '1' ?: 'selected' ?>>1</option>
+								<option value="2" <?= set_value('semester', isset($tahun_ajaran['semester']) ? $tahun_ajaran['semester'] : '') != '2' ?: 'selected' ?>>2</option>
+							</select>
 							<div class="invalid-feedback"><?= form_error('semester') ?></div>
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>

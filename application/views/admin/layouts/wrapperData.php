@@ -30,7 +30,6 @@
 
 <body class="card-no-border">
 	<!-- Memanggil file php di admin/components/preloadder.php -->
-	<?php $this->load->view('admin/components/preloadder') ?>
 	<div id="main-wrapper">
 		<!-- Memanggil file php di admin/components/header.php -->
 		<?php $this->load->view('admin/components/header') ?>

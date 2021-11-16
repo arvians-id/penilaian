@@ -64,10 +64,10 @@
 												";
 											$nilai = $this->db->query($query)->row_array();
 											?>
-											<td><?= $nilai['nilai'] ?></td>
+											<td><?= isset($nilai['nilai']) ? $nilai['nilai'] : '<span class="text-danger">Belum ada nilai!</span>' ?></td>
 										<?php endforeach ?>
 										<?php
-										$queryAs = "SELECT *,SUM(nilai) as jumlah, AVG(nilai) as total
+										$queryAs = "SELECT SUM(nilai) as jumlah, AVG(nilai) as total
 												FROM `tb_nilai`
 												JOIN `tb_pengajaran` ON `tb_pengajaran`.`id_pengajaran` = `tb_nilai`.`pengajaran_id`
 												JOIN `tb_data_siswa` ON `tb_data_siswa`.`id_siswa` = `tb_nilai`.`siswa_id`
@@ -82,8 +82,8 @@
 											<td><?= $cari['jumlah'] ?></td>
 											<td><?= round($cari['total'], 1) ?></td>
 										<?php else : ?>
-											<td></td>
-											<td></td>
+											<td><span class="text-danger">Belum ada total!</span></td>
+											<td><span class="text-danger">Belum ada total!</span></td>
 										<?php endif ?>
 									</tr>
 								<?php endforeach ?>
@@ -94,7 +94,7 @@
 								<?php foreach ($pengajaranMapelS as $pengajaranMapel) : ?>
 									<?php
 									$mapel = $pengajaranMapel['mapel_id'];
-									$queryJml = "SELECT *,SUM(nilai) as jumlah
+									$queryJml = "SELECT SUM(nilai) as jumlah
 												FROM `tb_nilai`
 												JOIN `tb_pengajaran` ON `tb_pengajaran`.`id_pengajaran` = `tb_nilai`.`pengajaran_id`
 												JOIN `tb_data_mata_pelajaran` ON `tb_data_mata_pelajaran`.`id_mapel` = `tb_nilai`.`mapel_id`
@@ -114,7 +114,7 @@
 								<?php foreach ($pengajaranMapelS as $pengajaranMapel) : ?>
 									<?php
 									$mapel = $pengajaranMapel['mapel_id'];
-									$queryJml = "SELECT *,AVG(nilai) as rata
+									$queryJml = "SELECT AVG(nilai) as rata
 												FROM `tb_nilai`
 												JOIN `tb_pengajaran` ON `tb_pengajaran`.`id_pengajaran` = `tb_nilai`.`pengajaran_id`
 												JOIN `tb_data_mata_pelajaran` ON `tb_data_mata_pelajaran`.`id_mapel` = `tb_nilai`.`mapel_id`

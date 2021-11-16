@@ -47,17 +47,10 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php if (empty($siswaS)) : ?>
-											<tr id="alert-data">
-												<td colspan="6">
-													<div class="alert alert-danger" role="alert">
-														Belum ada data siswa
-													</div>
-												</td>
-											</tr>
-										<?php else : ?>
-											<?php $no = 1;
-											foreach ($siswaS as $siswa) : ?>
+										<?php $no = 1;
+										foreach ($siswaS as $siswa) : ?>
+											<?php $exists = $this->db->get_where('tb_pengajaran_siswa', ['pengajaran_id' => $pengajaran_id, 'siswa_id' => $siswa['id_siswa']]) ?>
+											<?php if (!$exists->num_rows() > 0) : ?>
 												<tr>
 													<td><?= $no++ ?></td>
 													<td><?= $siswa['nama'] ?></td>
@@ -71,8 +64,8 @@
 														</form>
 													</td>
 												</tr>
-											<?php endforeach ?>
-										<?php endif ?>
+											<?php endif ?>
+										<?php endforeach ?>
 									</tbody>
 								</table>
 							</div>
@@ -93,32 +86,22 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php if (empty($pengajaranSiswaS)) : ?>
-											<tr id="alert-data">
-												<td colspan="6">
-													<div class="alert alert-danger" role="alert">
-														Belum ada siswa yang anda ambil
-													</div>
+										<?php $no = 1;
+										foreach ($pengajaranSiswaS as $pengajaranSiswa) : ?>
+											<tr>
+												<td><?= $no++ ?></td>
+												<td><?= $pengajaranSiswa['nama'] ?></td>
+												<td><?= $pengajaranSiswa['jenis_kelamin'] ?></td>
+												<td><?= $pengajaranSiswa['nama_wali'] ?></td>
+												<td><?= $pengajaranSiswa['tahun_masuk'] ?></td>
+												<td style="text-align:center">
+													<form action="<?= base_url('guru/remove_siswa/' . $pengajaranSiswa['id_siswa']) ?>" method="POST" onsubmit="return confirm('Jika anda menghapus siswa ini, maka anda setuju akan hilangnya data siswa dan nilai-nilai yang bersangkutan dengan siswa ini. Namun anda tidak perlu khawatir, data siswa di dalam pengajaran lain tidak akan ikut terhapus.');">
+														<input type="hidden" name="pengajaran_id" value="<?= $pengajaran_id ?>">
+														<button type="submit" class="btn btn-secondary btn-sm">-</button>
+													</form>
 												</td>
 											</tr>
-										<?php else : ?>
-											<?php $no = 1;
-											foreach ($pengajaranSiswaS as $pengajaranSiswa) : ?>
-												<tr>
-													<td><?= $no++ ?></td>
-													<td><?= $pengajaranSiswa['nama'] ?></td>
-													<td><?= $pengajaranSiswa['jenis_kelamin'] ?></td>
-													<td><?= $pengajaranSiswa['nama_wali'] ?></td>
-													<td><?= $pengajaranSiswa['tahun_masuk'] ?></td>
-													<td style="text-align:center">
-														<form action="<?= base_url('guru/remove_siswa/' . $pengajaranSiswa['id_siswa']) ?>" method="POST" onsubmit="return confirm('Jika anda menghapus siswa ini, maka anda setuju akan hilangnya data siswa dan nilai-nilai yang bersangkutan dengan siswa ini. Namun anda tidak perlu khawatir, data siswa di dalam pengajaran lain tidak akan ikut terhapus.');">
-															<input type="hidden" name="pengajaran_id" value="<?= $pengajaran_id ?>">
-															<button type="submit" class="btn btn-secondary btn-sm">-</button>
-														</form>
-													</td>
-												</tr>
-											<?php endforeach ?>
-										<?php endif ?>
+										<?php endforeach ?>
 									</tbody>
 								</table>
 							</div>

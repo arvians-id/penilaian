@@ -32,10 +32,10 @@
 					<hr>
 					<h4>Mata Pelajaran Yang Diambil</h4>
 					<hr>
-					<table class="table">
+					<table class="table display table-bordered table-striped no-wrap">
 						<thead>
 							<tr>
-								<th scope="col">#</th>
+								<th scope="col">No</th>
 								<th scope="col">Mata Pelajaran</th>
 							</tr>
 						</thead>

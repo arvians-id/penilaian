@@ -30,7 +30,6 @@
 
 <body class="card-no-border">
 	<!-- Memanggil file php di guru/components/preloadder.php -->
-	<?php $this->load->view('guru/components/preloadder') ?>
 	<div id="main-wrapper">
 		<!-- Memanggil file php di guru/components/header.php -->
 		<?php $this->load->view('guru/components/header') ?>

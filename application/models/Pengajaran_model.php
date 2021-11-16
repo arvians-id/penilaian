@@ -68,15 +68,33 @@ class Pengajaran_model extends CI_Model
 	{
 		$this->db->delete('tb_pengajaran_mapel', ['mapel_id' => $mapel_id, 'pengajaran_id' => $this->input->post('pengajaran_id')]);
 	}
-	public function simpanPengajaranSiswa($siswa_id)
+	public function simpanPengajaranSiswa($siswa_id, $pengajaran_id)
 	{
+		$this->db->trans_start();
 		$data = [
 			'pengajaran_id' => $this->input->post('pengajaran_id'),
 			'siswa_id' => $siswa_id
 		];
-		$this->db->insert('tb_pengajaran_siswa', $data);
+		$this->db->replace('tb_pengajaran_siswa', $data);
 
-		return ($this->db->affected_rows() != 1) ? false : true;
+		// Insert Nilai 0 pada mata pelajaran
+		$pengajaranMapelS = $this->db->get_where('tb_pengajaran_mapel', ['pengajaran_id' => $pengajaran_id])->result_array();
+		foreach ($pengajaranMapelS as $pengajaranMapel) {
+			$data = [
+				'pengajaran_id' => $pengajaran_id,
+				'siswa_id' => $siswa_id,
+				'mapel_id' => $pengajaranMapel['mapel_id'],
+				'nilai' => 0
+			];
+			$this->db->insert('tb_nilai', $data); // Insert data nilai
+		}
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === FALSE) {
+			$this->db->trans_rollback();
+		} else {
+			$this->db->trans_commit();
+		}
 	}
 	public function hapusPengajaranSiswa($siswa_id)
 	{
